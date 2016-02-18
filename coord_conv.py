@@ -7,6 +7,9 @@ from os import path
 
 #Global Variables 
 degree_sign = u"\N{DEGREE SIGN}"
+min_sign = u"\u0027"
+
+
 
 
 def response():
@@ -31,8 +34,8 @@ def response():
         print("You've selected DMS")
     else:
         print("You've selected DD")
-    
 
+    
 def addUTF():
     try: 
         fileNameRes = input("Enter file name.")
@@ -51,20 +54,75 @@ def addUTF():
     except:
         pass
 
+    
+def findDeg(latlon):
 
-def dms2dd(latlon):
+    degList = []
 
-    for letter in re.finditer(degree_sign, latlon):
-
-        start_posit = latlon[letter.start()]
+    for myLatLons in latlon.splitlines():
+        for dms in myLatLons.split():
             
+            degreeLoc = dms.find(degree_sign)
+
+            if "-" in dms[:degreeLoc]:
+                negPosit = dms.find("-")
+                myCoord = dms[negPosit+1:degreeLoc]
+                
+            else:
+                myCoord = dms[0:degreeLoc]
+
+            degList.append(myCoord)
+
+            
+        ''' thought this might be a solution, but couldn't consitently
+        get it to work
         if start_posit != 'N' or start_posit !='E' or start_posit !='W' or start_posit !='S':
-                deg = (latlon[letter.start()-2:letter.end()])
-        elif start_posit == 'N' or start_posit =='E' or start_posit =='W' or start_posit =='S':
-                deg = latlon[letter.start()-3:letter.end()]
+                deg = (latlon[degree.start()-2:degree.end()])
+        elif start_posit == 'N' or start_posit =='E' or start_posit =='W' or start_posit =='S' or start_posit=='-':
+                deg = latlon[degree.start()-3:degree.end()]
         else:
                 print("Error in parsing degrees.")
 
         rmvDegSgn = deg.replace(degree_sign," ")
         D = rmvDegSgn.strip()
-        print(D)
+
+        degList.append(D)
+        
+    print(degList)'''
+
+def findMin(latlon):
+
+    minSymbol = "'"
+
+    minList = []
+
+    for mins in re.finditer(minSymbol,latlon):
+        start_posit = latlon[mins.start()+2]
+        print(start_posit)
+
+
+
+
+def dms2dd(latlon):
+    c1 = 0
+    c2 = 0 
+
+    findDeg(latlon)
+
+    findMin(latlon)
+
+    while c1 < len(degList):
+        print(degList[c1])
+        c1+=1
+        while c2 <len(degList):
+            print(degList[c2])
+            c2+=1
+
+    
+
+    
+
+        
+
+    
+        
