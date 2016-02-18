@@ -73,22 +73,6 @@ def findDeg(latlon):
 
             degList.append(myCoord)
 
-            
-        ''' thought this might be a solution, but couldn't consitently
-        get it to work
-        if start_posit != 'N' or start_posit !='E' or start_posit !='W' or start_posit !='S':
-                deg = (latlon[degree.start()-2:degree.end()])
-        elif start_posit == 'N' or start_posit =='E' or start_posit =='W' or start_posit =='S' or start_posit=='-':
-                deg = latlon[degree.start()-3:degree.end()]
-        else:
-                print("Error in parsing degrees.")
-
-        rmvDegSgn = deg.replace(degree_sign," ")
-        D = rmvDegSgn.strip()
-
-        degList.append(D)
-        
-    print(degList)'''
 
 def findMin(latlon):
 
